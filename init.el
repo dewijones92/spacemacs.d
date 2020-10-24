@@ -1,6 +1,19 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup. ;; It must be stored in your home directory.
 
+(defun syncdewi-to-pi ()
+  "Sync org file to Raspberry Pi with external script."
+  (shell-command-to-string (format "yarn run lint-fix %s" buffer-file-name))
+  )
+(syncdewi-to-pi)
+(add-hook 'after-save-hook #'syncdewi-to-pi)
+
+(defun doodlebug ()
+  "Nonce function"
+  (interactive)
+  (message "Howdie-doodie fella!!!"))
+(doodlebug)
+
 (defun dotspacemacs/layers ()
   "Layer configuration:
 This function should only modify configuration layer settings."
@@ -39,6 +52,11 @@ This function should only modify configuration layer settings."
      vimscript
      lsp
 
+     (javascript :variables js2-mode-show-strict-warnings nil)
+
+     (javascript :variables
+                 javascript-backend 'lsp
+                 javascript-lsp-linter nil)
      nginx
      common-lisp
      go
@@ -396,9 +414,9 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("Fira Code"
+   dotspacemacs-default-font '("Iosevka"
                                :size 14.0
-                               :weight normal
+                               :weight bold
                                :width normal)
 
    ;; The leader key (default "SPC")
