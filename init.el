@@ -1,12 +1,13 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup. ;; It must be stored in your home directory.
 
-(defun syncdewi-to-pi ()
+(defun lint_save_hook ()
   "Sync org file to Raspberry Pi with external script."
-  (shell-command-to-string (format "yarn run lint-fix %s" buffer-file-name))
+  (when (eq major-mode 'js2-mode)
+    (shell-command-to-string (format "yarn run lint-fix %s" buffer-file-name))
+    )
   )
-(syncdewi-to-pi)
-(add-hook 'after-save-hook #'syncdewi-to-pi)
+(add-hook 'after-save-hook #'lint_save_hook)
 
 (defun doodlebug ()
   "Nonce function"
