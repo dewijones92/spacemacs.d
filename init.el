@@ -2,10 +2,9 @@
 ;; This file is loaded by Spacemacs at startup. ;; It must be stored in your home directory.
 
 (defun lint_save_hook ()
-  "Sync org file to Raspberry Pi with external script."
-  (when (eq major-mode 'js2-mode)
-    (shell-command-to-string (format "yarn run lint-fix %s" buffer-file-name))
-    )
+  (if (member major-mode '( rjsx-mode js2-mode ))
+      (shell-command-to-string (format "yarn run lint-fix %s" buffer-file-name))
+      (message "yeah right"))
   )
 (add-hook 'after-save-hook #'lint_save_hook)
 
