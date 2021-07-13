@@ -66,6 +66,7 @@ This function should only modify configuration layer settings."
      kotlin
      javascript
      haskell
+     (haskell :variables haskell-completion-backend 'lsp)
      react
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
